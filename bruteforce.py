@@ -1,42 +1,51 @@
+import itertools
 import csv
+import time
 
+NULL_NUMBER = "0.0"
 
+MAX_BUDGET = "500.00"
 
-def sortData_1(data):
-    # boucle sur chaque i du tableau
-    for i in range(1, len(data)):
-        print(data[1][2])
-        # boucle sur
-        for shares in data:
+   # O(2^N)
+def sort_shares(shares):
+    total_cost = 0.0
+    total_profit = 0.0
+    best_shares = []
+    for shares_number in range(1,len(shares)-1):
+        for combinaison in itertools.combinations(shares,shares_number):
+                if sum(float(items[1]) for items in combinaison) <= float(MAX_BUDGET):
+                    best_shares.append(combinaison)
 
-            if shares[1] == "price" or shares[1] <= "0.0":
+    best_combinaison = max(best_shares, key=lambda x: sum(items[2] for items in x))
+
+    total_cost = sum(float(x[1]) for x in best_combinaison)
+    total_profit = sum(float(x[2]) for x in best_combinaison)
+
+    print("coût total :",total_cost)
+    print("profit total :",total_profit)
+        
+    for i, best in enumerate(best_combinaison,1):
+        print(f"{i} - {best}") 
+
+def loading_data(data):
+    tab_data = []
+    with open(data, newline="") as file:
+        data_set = csv.reader(file, delimiter=',')
+        for lignes in data_set:
+            if lignes[0] == "name" or lignes[1] <= NULL_NUMBER or lignes[2] <= NULL_NUMBER:
                 pass
             else:
-                shares[2] = format(float(shares[2])/float(shares[1])*100, ".2f")
-    
-    # print(shares)
+                lignes[2] = (float(lignes[1])*float(lignes[2])/100)
+                tab_data.append(lignes)
+        sort_shares(tab_data) 
 
-        # min_index = 0
-        # number_min = 
+star = time.time()
 
+if __name__== '__main__':
+    loading_data("./data/datashares.csv")          
+    # loading_data("./data/dataset1_Python+P7.csv")
+    # loading_data("./data/dataset2_Python+P7.csv")          
 
-            # if list_pourcent[i] < index:
-            #     print(list_pourcent)
-
-            #     min_number = data[i] 
-            #     min_index = i
-        # data[min_index] = data[i]
-        # data[i] = min_number
-
-
-
-
-
-tab_data = []
-with open("./data/dataset1_Python+P7.csv", newline="") as file:
-    data_set = csv.reader(file, delimiter=',')
-    for lignes in data_set:
-        tab_data.append(lignes)
-    sortData_1(tab_data)   
-        
-
+end = time.time()
+elapsed = (end - star)
+print(f"Temps d'exécution : {elapsed:.3} s")
