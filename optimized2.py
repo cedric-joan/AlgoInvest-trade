@@ -7,22 +7,20 @@ MAX_BUDGET = "500.0"
 
    # O(Nlogn)
 def sort_shares(stocks):
-    best_list_shares = []
+    best_shares = []
     shares = sorted(stocks, key=lambda profit:float(profit[2]),reverse=True)
-    best_list_shares.append(shares[0])
-    for i in range(1,len(shares)):
-        if (float(best_list_shares[0][1]) + float(shares[i][1])) > float(MAX_BUDGET):
-            pass
-        else :
-            best_list_shares.append(shares[i])
+    for i in range(0,len(shares)):
+        if float(shares[i][1]) < float(shares[i][2]):
+            shares[i][2] = (float(shares[i][1])*float(shares[i][2])/100)
+            best_shares.append(shares[i])
 
-        while sum(float(items[1]) for items in best_list_shares) > float(MAX_BUDGET):
-            best_list_shares.pop()
+        while sum(float(items[1]) for items in best_shares) > float(MAX_BUDGET):
+            best_shares.pop()
 
-    for i, best in enumerate(best_list_shares,1):
+    for i, best in enumerate(best_shares,1):
         print(f"{i} - {best}") 
-    total_cost = sum(float(x[1]) for x in best_list_shares)
-    total_profit = sum(float(x[2]) for x in best_list_shares)
+    total_cost = sum(float(x[1]) for x in best_shares)
+    total_profit = sum(float(x[2]) for x in best_shares)
 
     print("coût total :",total_cost)
     print("profit total :",total_profit)
@@ -36,15 +34,14 @@ def loading_data(data):
             if lignes[0] == "name" or lignes[1] <= NULL_NUMBER or lignes[2] <= NULL_NUMBER:
                 pass
             else:
-                lignes[2] = (float(lignes[1])*float(lignes[2])/100)
                 tab_data.append(lignes)
         sort_shares(tab_data) 
 
 star = time.time()
 
 if __name__== '__main__':
-    loading_data("./data/datashares.csv")          
-              
+    # loading_data("./data/dataset1_Python+P7.csv")
+    loading_data("./data/dataset2_Python+P7.csv")          
 
 end = time.time()
 elapsed = (end - star)

@@ -6,12 +6,12 @@ NULL_NUMBER = "0.0"
 
 MAX_BUDGET = "500.00"
 
-   # O(2^N)
+   # O(N^2)
 def sort_shares(shares):
     total_cost = 0.0
-    total_profit = 0.0
     best_shares = []
-    for shares_number in range(1,len(shares)-1):
+    total_profit = 0.0
+    for shares_number in range(0,len(shares)-1):
         for combinaison in itertools.combinations(shares,shares_number):
                 if sum(float(items[1]) for items in combinaison) <= float(MAX_BUDGET):
                     best_shares.append(combinaison)
@@ -42,9 +42,10 @@ def loading_data(data):
 star = time.time()
 
 if __name__== '__main__':
-    loading_data("./data/datashares.csv")          
-    # loading_data("./data/dataset1_Python+P7.csv")
-    # loading_data("./data/dataset2_Python+P7.csv")          
+    # loading_data("./data/dataset.csv")  
+    loading_data("./data/dataset2_Python+P7.csv")          
+
+            
 
 end = time.time()
 elapsed = (end - star)
