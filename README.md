@@ -2,7 +2,7 @@
 
 Projet servant de fil rouge au cours Apprenez le webscraping avec Python, disponible sur OpenClassrooms. 
 
-AlgoInvest&Trade est une société financière spécialisée dans l'investissement. La société cherche à optimiser ses stratégies d'investissement à l'aide d'algorithmes, afin de dégager davantage de bénéfices pour ses clients. L'objectif de ce projet est de développer, optimiser et backtester un algorithme maximisant le profit et répondant au cachier des charges
+AlgoInvest&Trade est une société financière spécialisée dans l'investissement. La société cherche à optimiser ses stratégies d'investissement à l'aide d'algorithmes, afin de dégager davantage de bénéfices pour ses clients. L'objectif de ce projet est de développer, optimiser et backtester un algorithme maximisant le profit et répondant au cahier des charges
 
 # Compétences acquises
 
